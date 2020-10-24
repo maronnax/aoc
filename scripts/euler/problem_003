@@ -1,0 +1,33 @@
+#! /usr/env python
+
+
+def smallest_prime_factor(number):
+    # Because we index on 2..number this always returns a prime.
+    for x in range(2, number+1):
+        if number % x == 0:
+            return x
+
+
+def is_prime(num):
+    return (smallest_prime_factor(num) == num)
+
+
+def get_prime_factorization(number):
+    factors = []
+
+    while not is_prime(number):
+        factors.append(smallest_prime_factor(number))
+        number = number // factors[-1]  # Integer Division
+
+    factors.append(number)
+    return factors
+
+
+def main():
+    number = 600851475143
+    print(max(get_prime_factorization(number)))
+    return
+
+
+if __name__ == "__main__":
+    main()

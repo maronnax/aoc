@@ -1,0 +1,197 @@
+#! /usr/bin/env python
+from __future__ import print_function
+
+"""
+--- Day 1: The Tyranny of the Rocket Equation ---
+
+Santa has become stranded at the edge of the Solar System while
+delivering presents to other planets! To accurately calculate his
+position in space, safely align his warp drive, and return to Earth in
+time to save Christmas, he needs you to bring him measurements from
+fifty stars.
+
+Collect stars by solving puzzles. Two puzzles will be made available
+on each day in the Advent calendar; the second puzzle is unlocked when
+you complete the first. Each puzzle grants one star. Good luck!
+
+The Elves quickly load you into a spacecraft and prepare to launch.
+
+At the first Go / No Go poll, every Elf is Go until the Fuel
+Counter-Upper. They haven't determined the amount of fuel required
+yet.
+
+Fuel required to launch a given module is based on its
+mass. Specifically, to find the fuel required for a module, take its
+mass, divide by three, round down, and subtract 2.
+
+For example:
+
+    * For a mass of 12, divide by 3 and round down to get 4, then
+      subtract 2 to get 2.
+
+    * For a mass of 14, dividing by 3 and rounding down still yields 4,
+      so the fuel required is also 2.
+
+    * For a mass of 1969, the fuel required is 654.
+    * For a mass of 100756, the fuel required is 33583.
+
+The Fuel Counter-Upper needs to know the total fuel requirement. To
+find it, individually calculate the fuel needed for the mass of each
+module (your puzzle input), then add together all the fuel values.
+
+What is the sum of the fuel requirements for all of the modules on
+your spacecraft?
+
+"""
+
+__author__ = "naddy@energy-solution.com"
+
+import logging
+from argparse import ArgumentParser
+
+app_name = ""
+DEFAULT_LOG_FORMAT = "%(levelname)s - %(message)s"
+
+from toolbox.aoc.days2019.day01 import (
+    get_fuel_required_for_mass,
+    get_total_fuel_required_for_mass,
+)
+
+spacecraft_module_masses = [
+    94164,
+    100562,
+    114499,
+    134308,
+    138764,
+    114494,
+    70457,
+    113793,
+    117753,
+    77795,
+    110371,
+    113357,
+    118839,
+    99757,
+    119918,
+    145232,
+    147113,
+    142411,
+    93053,
+    81783,
+    124022,
+    98470,
+    77368,
+    75163,
+    79175,
+    131174,
+    93196,
+    121875,
+    86016,
+    148758,
+    126577,
+    109812,
+    105696,
+    66318,
+    146939,
+    113236,
+    130014,
+    135719,
+    127114,
+    69700,
+    109416,
+    64168,
+    89215,
+    69015,
+    128511,
+    59682,
+    79067,
+    58795,
+    145447,
+    129419,
+    93058,
+    63860,
+    146148,
+    58364,
+    74149,
+    81871,
+    116469,
+    131739,
+    132852,
+    148040,
+    98865,
+    56588,
+    79326,
+    114713,
+    52397,
+    134887,
+    114809,
+    113356,
+    60505,
+    142323,
+    84792,
+    117079,
+    147796,
+    50196,
+    148897,
+    100794,
+    50508,
+    71023,
+    149350,
+    66679,
+    93680,
+    116069,
+    133042,
+    117291,
+    127439,
+    81598,
+    93163,
+    83964,
+    64226,
+    63026,
+    82625,
+    59589,
+    94831,
+    66807,
+    120375,
+    112108,
+    83484,
+    109892,
+    66136,
+    126794,
+]
+
+def part_one():
+
+    fuel_required = sum(
+        map(get_fuel_required_for_mass, spacecraft_module_masses),
+    )
+    print(f"Fuel Required: {fuel_required}")
+    return
+
+def part_two():
+
+    total_fuel_required = sum(
+        map(get_total_fuel_required_for_mass, spacecraft_module_masses),
+    )
+    print(f"Total Fuel Required: {total_fuel_required}")
+
+    return
+
+def main():
+    part_one()
+    part_two()
+    return
+
+if __name__ == "__main__":
+
+    arg_parser = ArgumentParser()
+    arg_parser.add_argument('-v', '--verbose', action='count', default=0)
+    arg_parser.add_argument("--log-format", default=DEFAULT_LOG_FORMAT)
+
+    args = arg_parser.parse_args()
+
+    log_levels = [logging.WARNING, logging.INFO, logging.DEBUG]
+    log_level = log_levels[min(len(log_levels) - 1, args.verbose)]  # capped to number of levels
+    logging.basicConfig(level=log_level, format=args.log_format)
+
+    main()
