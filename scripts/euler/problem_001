@@ -1,0 +1,11 @@
+#! /usr/bin/env python
+
+def main():
+
+    func = lambda num: sum([x for x in range(num) if x%3 == 0 or x%5 == 0])
+
+    assert func(10) == 23
+    print(func(1000))
+
+if __name__ == "__main__":
+    main()
